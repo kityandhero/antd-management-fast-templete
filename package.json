@@ -1,13 +1,13 @@
 {
-  "name": "simple-antd-management-fast-framework",
+  "name": "antd-management-fast-template",
   "private": true,
   "version": "1.7.18",
-  "description": "simple-antd-management-fast-framework",
+  "description": "antd-management-fast-template",
   "keywords": [
-    "simple-antd-management-fast-framework"
+    "antd-management-fast-template"
   ],
   "author": "kityandhero <kityandhero@126.com>",
-  "homepage": "https://github.com/kityandhero/antd-management-fast-framework.git",
+  "homepage": "https://github.com/kityandhero/antd-management-fast-template.git",
   "license": "MIT",
   "main": "src/index.ts",
   "scripts": {
@@ -169,7 +169,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/kityandhero/antd-management-fast-framework.git"
+    "url": "git+https://github.com/kityandhero/antd-management-fast-template.git"
   },
   "bugs": {
     "url": "https://github.com/kityandhero/antd-management-fast-framework/issues"
