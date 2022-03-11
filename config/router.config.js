@@ -35,6 +35,10 @@ export default [
                 redirect: '/currentOperator/setting/basicInfo',
               },
               {
+                path: '/currentOperator/setting/basicInfo',
+                component: './CurrentOperator/Setting/BasicInfo',
+              },
+              {
                 path: '/currentOperator/setting/password',
                 component: './CurrentOperator/Setting/Password',
               },

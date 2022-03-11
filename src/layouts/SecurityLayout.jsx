@@ -30,16 +30,16 @@ class SecurityLayout extends React.Component {
     const { children, loading, currentUser } = this.props; // You can replace it to your authentication rule (such as check token exists)
     // 你可以把它替换成你自己的登录认证规则（比如判断 token 是否存在）
 
-    const signInSuccess = currentUser && currentUser.userId;
+    const hasOperator = currentUser && currentUser.userId;
     const queryString = queryStringify({
       redirect: window.location.href,
     });
 
-    if ((!signInSuccess && loading) || !isReady) {
+    if ((!hasOperator && loading) || !isReady) {
       return <PageLoading />;
     }
 
-    if (!signInSuccess && window.location.pathname !== entrancePath) {
+    if (!hasOperator && window.location.pathname !== entrancePath) {
       return <Redirect to={`${entrancePath}?${queryString}`} />;
     }
 

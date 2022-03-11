@@ -1,4 +1,8 @@
-import { handleCommonDataAssist } from 'antd-management-fast-framework/es/utils/requestAssistor';
+import {
+  handlePageListDataAssist,
+  handleListDataAssist,
+  handleCommonDataAssist,
+} from 'antd-management-fast-framework/es/utils/requestAssistor';
 
 import {
   getCurrentData,
@@ -48,6 +52,12 @@ export default {
   },
 
   reducers: {
+    handlePageListData(state, action) {
+      return handlePageListDataAssist(state, action);
+    },
+    handleListData(state, action) {
+      return handleListDataAssist(state, action);
+    },
     handleCommonData(state, action) {
       return handleCommonDataAssist(state, action);
     },
