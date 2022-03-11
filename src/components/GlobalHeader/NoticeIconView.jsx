@@ -12,7 +12,7 @@ class GlobalHeaderRight extends Component {
 
     if (dispatch) {
       dispatch({
-        type: 'global/fetchNotices',
+        type: 'notice/singleList',
       });
     }
   }
@@ -23,7 +23,7 @@ class GlobalHeaderRight extends Component {
 
     if (dispatch) {
       dispatch({
-        type: 'global/changeNoticeReadState',
+        type: 'notice/changeNoticeReadState',
         payload: id,
       });
     }
@@ -35,7 +35,7 @@ class GlobalHeaderRight extends Component {
 
     if (dispatch) {
       dispatch({
-        type: 'global/clearNotices',
+        type: 'notice/clearNotices',
         payload: key,
       });
     }
@@ -150,7 +150,7 @@ class GlobalHeaderRight extends Component {
 export default connect(({ user, global, loading }) => ({
   currentUser: user.currentUser,
   collapsed: global.collapsed,
-  fetchingMoreNotices: loading.effects['global/fetchMoreNotices'],
-  fetchingNotices: loading.effects['global/fetchNotices'],
+  fetchingMoreNotices: loading.effects['notice/singleList'],
+  fetchingNotices: loading.effects['notice/singleList'],
   notices: global.notices,
 }))(GlobalHeaderRight);
