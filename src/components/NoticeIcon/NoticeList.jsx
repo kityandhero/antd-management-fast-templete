@@ -1,6 +1,7 @@
-import { Avatar, List } from 'antd';
 import React from 'react';
 import classNames from 'classnames';
+import { Avatar, List } from 'antd';
+
 import styles from './NoticeList.less';
 
 const NoticeList = ({

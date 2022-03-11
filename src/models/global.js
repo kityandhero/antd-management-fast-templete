@@ -6,15 +6,9 @@ import {
 import { whetherString } from 'antd-management-fast-framework/es/utils/constants';
 import { modelCollection } from 'antd-management-fast-framework/es/utils/globalModel';
 
-import {
-  getMetaDataCache,
-  setMetaDataCache,
-  getCurrentOperatorCache,
-  setCurrentOperatorCache,
-} from '@/utils/storageAssist';
+import { getMetaDataCache, setMetaDataCache } from '@/utils/storageAssist';
 
 import { getData } from '../services/global';
-import { getCurrentBasicInfoData } from '../services/currentOperator';
 
 const GlobalModel = {
   namespace: 'global',
@@ -22,7 +16,6 @@ const GlobalModel = {
   state: {
     ...(modelCollection || {}),
     ...{
-      currentOperator: null,
       collapsed: false,
       amapObject: null,
       notices: [],
@@ -79,39 +72,6 @@ const GlobalModel = {
         payload: result,
       });
     },
-    *getCurrentOperator({ payload }, { call, put }) {
-      const { force } = payload || { force: false };
-      let result = {};
-      let fromRemote = force || false;
-
-      if (!force) {
-        result = getCurrentOperatorCache();
-
-        if ((result || null) == null) {
-          fromRemote = true;
-          result = {};
-        }
-      }
-
-      if (fromRemote) {
-        const response = yield call(getCurrentBasicInfoData, payload);
-
-        const data = pretreatmentRemoteSingleData(response);
-
-        const { dataSuccess, data: metaData } = data;
-
-        if (dataSuccess) {
-          result = metaData;
-
-          setCurrentOperatorCache(result);
-        }
-      }
-
-      yield put({
-        type: 'changeCurrentOperator',
-        payload: result,
-      });
-    },
     *setAMapObject({ payload }, { put }) {
       yield put({
         type: 'handleAmapObject',
@@ -128,12 +88,6 @@ const GlobalModel = {
       return {
         ...state,
         ...payload,
-      };
-    },
-    changeCurrentOperator(state, { payload }) {
-      return {
-        ...state,
-        currentOperator: payload,
       };
     },
     handleAmapObject(state, { payload }) {

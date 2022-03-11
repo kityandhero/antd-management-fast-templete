@@ -11,7 +11,7 @@ export async function singleListData() {
 
 export async function changeNoticeReadData() {
   return request({
-    api: `/notice/getCurrent`,
+    api: `/notice/changeNoticeRead`,
     virtualSuccessResponse: {
       data: {},
     },

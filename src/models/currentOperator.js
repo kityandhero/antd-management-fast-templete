@@ -2,10 +2,12 @@ import {
   handlePageListDataAssist,
   handleListDataAssist,
   handleCommonDataAssist,
+  pretreatmentRemoteSingleData,
 } from 'antd-management-fast-framework/es/utils/requestAssistor';
 
+import { getCurrentOperatorCache, setCurrentOperatorCache } from '@/utils/storageAssist';
+
 import {
-  getCurrentData,
   getCurrentBasicInfoData,
   updateCurrentBasicInfoData,
   changeCurrentPasswordData,
@@ -14,15 +16,42 @@ import {
 export default {
   namespace: 'currentOperator',
 
-  state: {},
+  state: {
+    currentOperator: null,
+  },
 
   effects: {
-    *getCurrent({ payload }, { call, put }) {
-      const response = yield call(getCurrentData, payload);
+    *getCurrentOperator({ payload }, { call, put }) {
+      const { force } = payload || { force: false };
+      let result = {};
+      let fromRemote = force || false;
+
+      if (!force) {
+        result = getCurrentOperatorCache();
+
+        if ((result || null) == null) {
+          fromRemote = true;
+          result = {};
+        }
+      }
+
+      if (fromRemote) {
+        const response = yield call(getCurrentBasicInfoData, payload);
+
+        const data = pretreatmentRemoteSingleData(response);
+
+        const { dataSuccess, data: metaData } = data;
+
+        if (dataSuccess) {
+          result = metaData;
+
+          setCurrentOperatorCache(result);
+        }
+      }
 
       yield put({
-        type: 'handleCommonData',
-        payload: response,
+        type: 'changeCurrentOperator',
+        payload: result,
       });
     },
     *getCurrentBasicInfo({ payload }, { call, put }) {
@@ -52,6 +81,12 @@ export default {
   },
 
   reducers: {
+    changeCurrentOperator(state, { payload }) {
+      return {
+        ...state,
+        currentOperator: payload,
+      };
+    },
     handlePageListData(state, action) {
       return handlePageListDataAssist(state, action);
     },
