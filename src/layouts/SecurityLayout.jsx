@@ -5,7 +5,7 @@ import { PageLoading } from '@ant-design/pro-layout';
 import { queryStringify } from 'antd-management-fast-framework/es/utils/tools';
 import { defaultSettings } from '@/defaultSettings';
 
-const loginPath = defaultSettings.getLoginPath();
+const entrancePath = defaultSettings.getEntrancePath();
 
 class SecurityLayout extends React.Component {
   state = {
@@ -30,17 +30,17 @@ class SecurityLayout extends React.Component {
     const { children, loading, currentUser } = this.props; // You can replace it to your authentication rule (such as check token exists)
     // 你可以把它替换成你自己的登录认证规则（比如判断 token 是否存在）
 
-    const isLogin = currentUser && currentUser.userId;
+    const signInSuccess = currentUser && currentUser.userId;
     const queryString = queryStringify({
       redirect: window.location.href,
     });
 
-    if ((!isLogin && loading) || !isReady) {
+    if ((!signInSuccess && loading) || !isReady) {
       return <PageLoading />;
     }
 
-    if (!isLogin && window.location.pathname !== loginPath) {
-      return <Redirect to={`${loginPath}?${queryString}`} />;
+    if (!signInSuccess && window.location.pathname !== entrancePath) {
+      return <Redirect to={`${entrancePath}?${queryString}`} />;
     }
 
     return children;

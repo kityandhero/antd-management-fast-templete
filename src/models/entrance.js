@@ -11,10 +11,10 @@ import { getPageQuery } from 'antd-management-fast-framework/es/utils/utils';
 import { setAuthority } from 'antd-management-fast-framework/es/utils/authority';
 
 import { setDataFlag } from '@/utils/storageAssist';
-import { accountLogin, getCaptcha } from '@/services/entrance';
+import { signInData, getCaptcha } from '@/services/entrance';
 import { defaultSettings } from '@/defaultSettings';
 
-const loginPath = defaultSettings.getLoginPath();
+const entrancePath = defaultSettings.getEntrancePath();
 
 export default {
   namespace: 'entrance',
@@ -24,8 +24,8 @@ export default {
   },
 
   effects: {
-    *login({ payload }, { call, put }) {
-      const response = yield call(accountLogin, payload);
+    *signIn({ payload }, { call, put }) {
+      const response = yield call(signInData, payload);
 
       const data = pretreatmentRemoteSingleData(response);
 
@@ -62,15 +62,15 @@ export default {
       yield call(getCaptcha, payload);
     },
 
-    logout() {
+    signOut() {
       const { redirect } = getPageQuery(); // Note: There may be security issues, please note
 
-      if (window.location.pathname !== loginPath && !redirect) {
+      if (window.location.pathname !== entrancePath && !redirect) {
         clearCustomData();
 
         message.info('退出登录成功！', 0.6).then(() => {
           history.replace({
-            pathname: loginPath,
+            pathname: entrancePath,
             search: queryStringify({
               redirect: window.location.href,
             }),

@@ -5,8 +5,8 @@ export default [
     path: '/entrance',
     component: '../layouts/UserLayout',
     routes: [
-      { path: '/entrance', redirect: '/entrance/login' },
-      { path: '/entrance/login', component: './Entrance/Login' },
+      { path: '/entrance', redirect: '/entrance/signIn' },
+      { path: '/entrance/signIn', component: './Entrance/SignIn' },
     ],
   },
   {

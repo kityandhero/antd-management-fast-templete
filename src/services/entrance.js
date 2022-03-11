@@ -3,7 +3,7 @@ import moment from 'moment';
 import { queryStringify } from 'antd-management-fast-framework/es/utils/tools';
 import { request } from 'antd-management-fast-framework/es/utils/requestAssistor';
 
-export async function accountLogin(params) {
+export async function signInData(params) {
   return request({
     api: '/entrance/signIn',
     params,
@@ -18,9 +18,9 @@ export async function accountLogin(params) {
   });
 }
 
-export async function register(params) {
+export async function signUp(params) {
   return request({
-    api: `/entrance/register`,
+    api: `/entrance/signUp`,
     params,
   });
 }

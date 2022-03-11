@@ -15,12 +15,12 @@ class AvatarDropdown extends React.Component {
   onMenuClick = (event) => {
     const { key } = event;
 
-    if (key === 'logout') {
+    if (key === 'signOut') {
       const { dispatch } = this.props;
 
       if (dispatch) {
         dispatch({
-          type: 'login/logout',
+          type: 'entrance/signOut',
         });
       }
 
@@ -48,7 +48,7 @@ class AvatarDropdown extends React.Component {
 
         {menuItems.length > 0 ? <Menu.Divider /> : null}
 
-        <Menu.Item key="logout">
+        <Menu.Item key="signOut">
           <LogoutOutlined />
           退出登录
         </Menu.Item>
