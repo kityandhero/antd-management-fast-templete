@@ -1,25 +1,15 @@
-// import { AlipayCircleOutlined, TaobaoCircleOutlined, WeiboCircleOutlined } from '@ant-design/icons';
-import { Alert, Checkbox } from 'antd';
 import React, { useState } from 'react';
-import {
-  connect,
-  //  Link
-} from 'umi';
+import { connect, Link } from 'umi';
+import { Alert, Checkbox } from 'antd';
+import { AlipayCircleOutlined, TaobaoCircleOutlined, WeiboCircleOutlined } from '@ant-design/icons';
 
-import EntranceFrom from './components/Entrance';
+import EntranceFrom from './components';
 
 import styles from './style.less';
 
-const {
-  // Tab,
-  UserName,
-  Password,
-  //  Mobile,
-  // Captcha,
-  Submit,
-} = EntranceFrom;
+const { Tab, UserName, Password, Mobile, Captcha, Submit } = EntranceFrom;
 
-const SignMessage = ({ content }) => (
+const EntranceMessage = ({ content }) => (
   <Alert
     style={{
       marginBottom: 24,
@@ -30,7 +20,7 @@ const SignMessage = ({ content }) => (
   />
 );
 
-const Sign = (props) => {
+const Entrance = (props) => {
   const { entrance = {}, submitting } = props;
   const { status, type: loginType } = entrance;
   const [type, setType] = useState('account');
@@ -48,7 +38,7 @@ const Sign = (props) => {
       <EntranceFrom activeKey={type} onTabChange={setType} onSubmit={handleSubmit}>
         <>
           {status === 'error' && loginType === 'account' && !submitting && (
-            <SignMessage content="账户或密码错误（admin/ant.design）" />
+            <EntranceMessage content="账户或密码错误（admin/ant.design）" />
           )}
 
           <UserName
@@ -77,7 +67,7 @@ const Sign = (props) => {
           //  tab="账户密码登录"
         >
           {status === 'error' && loginType === 'account' && !submitting && (
-            <LoginMessage content="账户或密码错误（admin/ant.design）" />
+            <EntranceMessage content="账户或密码错误（admin/ant.design）" />
           )}
 
           <UserName
@@ -103,7 +93,7 @@ const Sign = (props) => {
         </Tab>
         <Tab key="mobile" tab="手机号登录">
           {status === 'error' && loginType === 'mobile' && !submitting && (
-            <LoginMessage content="验证码错误" />
+            <EntranceMessage content="验证码错误" />
           )}
           <Mobile
             name="mobile"
@@ -163,4 +153,4 @@ const Sign = (props) => {
 export default connect(({ entrance, loading }) => ({
   entrance,
   submitting: loading.effects['entrance/signIn'],
-}))(Sign);
+}))(Entrance);

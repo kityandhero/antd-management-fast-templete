@@ -14,7 +14,6 @@ import {
   setCurrentOperatorCache,
 } from '@/utils/storageAssist';
 
-import { queryNotices } from '../services/user';
 import { getData } from '../services/global';
 import { getCurrentBasicInfoData } from '../services/currentOperator';
 

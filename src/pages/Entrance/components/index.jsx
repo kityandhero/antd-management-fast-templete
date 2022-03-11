@@ -3,7 +3,7 @@ import useMergeValue from 'use-merge-value';
 import classNames from 'classnames';
 import { Tabs, Form } from 'antd';
 
-import SignContext from './EntranceContext';
+import EntranceContext from './EntranceContext';
 import EntranceItem from './EntranceItem';
 import EntranceSubmit from './EntranceSubmit';
 import EntranceTab from './EntranceTab';
@@ -32,7 +32,7 @@ const Entrance = (props) => {
   });
 
   return (
-    <SignContext.Provider
+    <EntranceContext.Provider
       value={{
         tabUtil: {
           addTab: (id) => {
@@ -81,7 +81,7 @@ const Entrance = (props) => {
           )}
         </Form>
       </div>
-    </SignContext.Provider>
+    </EntranceContext.Provider>
   );
 };
 
